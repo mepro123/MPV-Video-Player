@@ -1,0 +1,59 @@
+#Persistent
+#SingleInstance Force
+SetTitleMatchMode, 2
+
+Gui, Add, Text, x10 y10 w100 h20, MPV Path:
+Gui, Add, Edit, vmpvPath x120 y10 w300 h20, C:\mpv\mpv.exe
+Gui, Add, Button, x430 y10 w80 h20 gBrowseMPV, Browse
+
+Gui, Add, Text, x10 y40 w100 h20, Video Path:
+Gui, Add, Edit, vvideoPath x120 y40 w300 h20, C:\ProgramData\Lively Wallpaper\jane-doe.1920x1080.mp4
+Gui, Add, Button, x430 y40 w80 h20 gBrowseVideo, Browse
+
+Gui, Add, Button, x10 y80 w200 h30 gStartMPV, Start MPV
+Gui, Add, Button, x220 y80 w200 h30 gCloseMPV, Close MPV
+
+Gui, Show, w530 h130, MPV Video Player
+Return
+
+BrowseMPV:
+    FileSelectFile, mpvPath,,,%A_ScriptDir%, Select MPV Executable (*.exe)
+    if (mpvPath != "")
+        GuiControl,, mpvPath, %mpvPath%
+Return
+
+BrowseVideo:
+    FileSelectFile, videoPath,,,%A_ScriptDir%, Select Video File (*.mp4)
+    if (videoPath != "")
+        GuiControl,, videoPath, %videoPath%
+Return
+
+StartMPV:
+    GuiControlGet, mpvPath
+    GuiControlGet, videoPath
+    if (!FileExist(mpvPath) || !FileExist(videoPath)) {
+        MsgBox, Error: Invalid MPV or Video Path!
+        Return
+    }
+    
+    ; Run MPV in fullscreen mode
+    Run, "%mpvPath%" --loop --fullscreen --no-border --ontop --no-input-default-bindings --no-input-cursor --wid=0 "%videoPath%", , , mpvPID
+    
+    ; Wait for MPV window
+    Sleep, 1000
+    WinWait, ahk_pid %mpvPID%
+    WinGet, hMPV, ID, ahk_pid %mpvPID%
+    
+    ; Make MPV non-interactable (click-through)
+    WinSet, ExStyle, +0x20, ahk_pid %mpvPID%  ; WS_EX_TRANSPARENT (Click-through)
+    WinSet, Style, -0xC00000, ahk_pid %mpvPID%  ; Removes title bar
+    WinSet, AlwaysOnTop, On, ahk_pid %mpvPID%  ; Keep MPV on top
+    
+Return
+
+CloseMPV:
+    Process, Close, %mpvPID%
+Return
+
+GuiClose:
+    ExitApp
