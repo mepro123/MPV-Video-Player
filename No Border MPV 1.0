@@ -7,7 +7,7 @@ Gui, Add, Edit, vmpvPath x120 y10 w300 h20, C:\mpv\mpv.exe
 Gui, Add, Button, x430 y10 w80 h20 gBrowseMPV, Browse
 
 Gui, Add, Text, x10 y40 w100 h20, Video Path:
-Gui, Add, Edit, vvideoPath x120 y40 w300 h20, C:\ProgramData\Lively Wallpaper\jane-doe.1920x1080.mp4
+Gui, Add, Edit, vvideoPath x120 y40 w300 h20, Enter Video Path
 Gui, Add, Button, x430 y40 w80 h20 gBrowseVideo, Browse
 
 Gui, Add, Button, x10 y80 w200 h30 gStartMPV, Start MPV
