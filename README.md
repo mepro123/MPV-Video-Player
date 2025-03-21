@@ -1,5 +1,8 @@
 # MPV-Video-Player
 
+## Versions
+###   1.0: https://tinyurl.com/yc8zesdt
+
 ## Downloads
 ###   AutoHotkey: https://www.autohotkey.com/download/ahk-install.exe
 ###   MPV: https://tinyurl.com/54nz8hvx
