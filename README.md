@@ -14,7 +14,7 @@
 ###   4: Extract MPV With WinRar Or 7z
 ###   5: Name MPV File To MPV Instead Of Others
 ###   6: Move MPV File To C:\
-###   7: Download File And Install No Border MPV
+###   7: Download Latest Version And Install
 ###   8: Run And Choose Video (MP4 Best)
 ###   9: Enjoy!
 
